@@ -1,0 +1,39 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+	<changeSet author="Gaurav Pandarkar" id="20240419-1">
+		<insert schemaName="authentication_service" tableName="users">
+			<column name="user_code" value="200" />
+			<column name="user_id" value="1" />
+			<column name="username" value="aniket" />
+			<column name="password" value="aniket@123" />
+			<column name="email" value="aniket@gmail.com" />
+			<column name="age" value="21" />
+		</insert>
+	</changeSet>
+	<changeSet author="Gaurav Pandarkar" id="20240421-2">
+		<insert schemaName="authentication_service" tableName="users">
+			<column name="user_code" value="201" />
+			<column name="user_id" value="2" />
+			<column name="username" value="gaurav" />
+			<column name="password" value="gaurav@123" />
+			<column name="email" value="gaurav@gmail.com" />
+			<column name="age" value="21" />
+		</insert>
+	</changeSet>
+	<changeSet author="Gaurav Pandarkar" id="20240421-3">
+		<insert schemaName="authentication_service" tableName="users">
+			<column name="user_code" value="203" />
+			<column name="user_id" value="3" />
+			<column name="username" value="ram" />
+			<column name="password" value="ram@123" />
+			<column name="email" value="ram@gmail.com" />
+			<column name="age" value="21" />
+		</insert>
+	</changeSet>
+	<changeSet author="Gaurav Pandarkar" id="20240419-2">
+		<insert schemaName="authentication_service" tableName="roles">
+			<column name="roleId" value="1" />
+			<column name="roleName" value="DataScientist" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

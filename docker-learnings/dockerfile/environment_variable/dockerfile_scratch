@@ -1,0 +1,22 @@
+FROM ubuntu:latest
+
+#ARG USR
+#ARG PASS
+
+# Create users
+RUN useradd -m -u 1001 vzodge
+
+# Copy files
+COPY entry_point.sh /entry_point.sh
+RUN chmod +x /entry_point.sh
+RUN /entry_point.sh
+RUN chmod 700 /entry_point.sh
+RUN rm -rf /entry_point.sh
+
+
+#ENV USER=${USR}
+#ENV PASSWORD=${PASS}
+
+USER vzodge
+# Execute vaibhav command
+ENTRYPOINT [ "bash" ]

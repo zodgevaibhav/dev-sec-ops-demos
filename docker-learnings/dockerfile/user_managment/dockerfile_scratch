@@ -1,0 +1,23 @@
+FROM ubuntu:latest
+
+# Create users
+RUN useradd -m -u 1001 vaibhav
+RUN useradd -m -u 1002 zodge
+
+# Copy files
+COPY vaibhav /vaibhav
+COPY zodge /zodge
+
+# Set ownership and permissions for vaibhav executable
+RUN chown vaibhav:vaibhav /vaibhav
+RUN chmod 700 /vaibhav
+
+# Set ownership and permissions for zodge executable
+RUN chown zodge:zodge /zodge
+RUN chmod 700 /zodge
+
+# Switch to zodge user
+USER zodge
+
+# Execute vaibhav command
+CMD ["bash"]

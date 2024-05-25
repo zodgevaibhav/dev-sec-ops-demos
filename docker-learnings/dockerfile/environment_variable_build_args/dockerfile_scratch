@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+ARG USR
+ARG PASS
+
+# Create users
+RUN useradd -m -u 1001 vzodge
+COPY app /app
+
+ENV USER=${USR}
+ENV PASSWORD=${PASS}
+
+USER vzodge
+# Execute vaibhav command
+ENTRYPOINT [ "/app" ]

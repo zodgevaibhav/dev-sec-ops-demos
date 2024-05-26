@@ -6,6 +6,7 @@ ARG PASS
 # Create users
 RUN useradd -m -u 1001 vzodge
 COPY app /app
+RUN
 
 ENV USER=${USR}
 ENV PASSWORD=${PASS}

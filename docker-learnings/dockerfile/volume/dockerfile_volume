@@ -1,0 +1,11 @@
+FROM ubuntu:latest
+
+ARG message
+
+WORKDIR /usr/src/app
+RUN mkdir data
+VOLUME [/usr/src/app/data]
+
+RUN echo ${message} >> /usr/src/app/data/message.txt
+
+CMD ["bash"]

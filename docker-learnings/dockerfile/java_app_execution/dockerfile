@@ -1,0 +1,11 @@
+FROM ubuntu:latest
+
+RUN apt update
+
+RUN apt-get install -y openjdk-17-jdk
+
+WORKDIR /app
+
+COPY api-gateway-docker-image-0.0.1.jar /app/api-gateway-docker-image-0.0.1.jar
+
+ENTRYPOINT [ "java","-jar","api-gateway-docker-image-0.0.1.jar" ]

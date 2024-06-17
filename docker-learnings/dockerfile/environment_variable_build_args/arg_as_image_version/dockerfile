@@ -1,0 +1,6 @@
+ARG VERSION=latest
+
+FROM ubuntu:$VERSION
+
+# Print the OS version details
+CMD ["cat","/etc/os-release"] 

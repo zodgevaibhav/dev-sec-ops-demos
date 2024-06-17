@@ -1,0 +1,7 @@
+FROM ubuntu:latest
+
+ARG USR
+ARG PASS
+
+ENV USER=${USR}
+ENV PASSWORD=${PASS}

@@ -1,0 +1,6 @@
+FROM ubuntu:latest
+
+WORKDIR /usr/src/app
+RUN mkdir data
+
+CMD ["bash"]

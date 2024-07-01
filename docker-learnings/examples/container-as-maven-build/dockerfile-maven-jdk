@@ -1,0 +1,8 @@
+# Base WORKDIR => /
+FROM ubuntu:latest
+
+# Install jdk 17
+RUN apt update
+RUN apt install -y openjdk-17-jdk
+RUN apt install -y maven
+WORKDIR /app

@@ -15,15 +15,26 @@
 # Connect two containers over Bridge(default) network using container name (--link)
     To connect the containers each other using domain name (container name), we need to link the containers with each other
     It's useful for default network but not needed or available for other network
+    Internally it updates the /etc/host file with container name and ip adress
 
         -- docker run --rm -dit -p 3306:3306 --name mysql_directory -e MYSQL_ROOT_PASSWORD=Test@123 mysql:latest
 
         -- docker run -it --rm -e DB_HOST=mysql --link mysql_directory:mysql --name directory-svc dnyanyog.org/auth-service:latest
 
-# Run two containers in named network
+# Connect two containers over Bridge(default) network using container name (--network container:<container_name>)
     To connect the containers each other using domain name (container name), we need to link the containers with each other
     It's useful for default network but not needed or available for other network
+    Internally it updates the /etc/host file with container name and ip adress
 
         -- docker run --rm -dit -p 3306:3306 --name mysql_directory -e MYSQL_ROOT_PASSWORD=Test@123 mysql:latest
 
-        -- docker run -it --rm -e DB_HOST=mysql --link mysql_directory:mysql --name directory-svc dnyanyog.org/auth-service:latest
+        -- docker run -it --rm -e DB_HOST=mysql --network container:mysql_directory --name directory-svc dnyanyog.org/auth-service:latest
+
+# Run two containers in named network (User defined container)
+    1. Create network
+        docker network create services
+    2. Then run DB using the network 
+        -- docker run --rm -dit -p 3306:3306 --name mysql --network services -e MYSQL_ROOT_PASSWORD=Test@123 mysql:latest
+    3. Run the service using the network and container name as host name
+        -- docker run -it --rm -e DB_HOST=mysql --network services --name directory-svc dnyanyog.org/auth-service:latest
+

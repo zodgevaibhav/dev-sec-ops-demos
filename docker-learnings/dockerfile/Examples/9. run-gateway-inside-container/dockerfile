@@ -1,0 +1,17 @@
+# Base WORKDIR => /
+FROM mysql:latest
+
+# Install jdk 17
+RUN apt update
+RUN apt install -y openjdk-17-jdk
+
+COPY test.txt test.txt
+
+# Set container run time path
+WORKDIR /app
+
+# Copy Jar from MAC to Ubunutu > /app
+COPY api-gateway-docker-image-0.0.1.jar api-gateway.jar
+
+# Run java -jar /app/api-gateway-docker-image-0.0.1.jar
+CMD ["java", "-jar","api-gateway.jar"]

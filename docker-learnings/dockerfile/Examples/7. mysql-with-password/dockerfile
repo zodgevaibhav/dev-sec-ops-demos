@@ -1,0 +1,27 @@
+# Base WORKDIR => /
+FROM mysql:latest
+
+#only documentation
+VOLUME [ "/app/data" ] 
+
+#only documentation
+EXPOSE 8080
+
+RUN mkdir /data
+
+ENV MYSQL_ROOT_PASSWORD="Test@123"
+
+# Container isolated environment
+    # Separate Network -> -p      => Host  => Cointainer   - Topic 2 : Network
+    # Separate File System        => Host  => Cointainer   - Topic 1 : Volume
+    #     File Share ->  Container : Container
+    #           1. Create volume (CMD -> docker volume create dnyanyog_volume ) // Named Volume => docker managed volume
+    #           2. Map volume map with container folder (CMD -> -v dnyanyog_volume:/app/data )
+    #                   docker run -it --rm -v dnyanyog_volume:/app/data ubuntu:latest
+    #     File Share ->  Host : Container : Container
+    #           1. Map host folder with container folder (CMD -> -v dnyanyog_volume:/app/data )
+    #                   docker run -it --rm -v /Users/vzodge/mydata:/app/data ubuntu:latest  // Host Mount Container => Managed Volume
+    #                   docker run -it --rm -v $(PWD):/app/data ubuntu:latest
+    # x Separate Process => XXXXXX  => Host  => Cointainer || Volume
+    # auth-service              => Container
+    # auth-service-db:3307  => Host    => Container

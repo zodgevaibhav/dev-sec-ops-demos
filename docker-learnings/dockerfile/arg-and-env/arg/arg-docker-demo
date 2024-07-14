@@ -1,0 +1,17 @@
+# Variable
+ARG VERSION
+
+FROM ubuntu:${VERSION}
+
+# Documentaion
+VOLUME [ "/data" ]
+
+# Documentaion => -p
+EXPOSE 3306
+
+
+RUN apt update
+
+CMD ["/bin/bash"]
+
+# docker build --build-arg VERSION="24.04" -t dnyanyog.org/arg-demo:latest -f dockerfile .

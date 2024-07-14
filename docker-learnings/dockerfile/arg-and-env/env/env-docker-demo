@@ -1,0 +1,11 @@
+# Variable
+FROM ubuntu:latest
+
+ENV DB_USER="vzodge"
+ENV DB_PASSWORD="Test@123"
+
+CMD ["/bin/bash"]
+
+# Inside container run below commands to print environmental variable value
+#  echo $DB_USER
+#  echo $DB_PASSWORD

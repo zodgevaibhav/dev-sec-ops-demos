@@ -1,0 +1,8 @@
+FROM nginx:alpine
+
+COPY build /usr/share/nginx/html
+
+#Documentation
+EXPOSE 8087
+
+CMD [ "nginx","-g","daemon off;" ]

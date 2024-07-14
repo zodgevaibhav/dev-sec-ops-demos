@@ -38,3 +38,30 @@
     3. Run the service using the network and container name as host name
         -- docker run -it --rm -e DB_HOST=mysql --network services --name directory-svc dnyanyog.org/auth-service:latest
 
+# Assignment
+
+    1. Create user defined network and use it for all containers
+
+    2. Craete docker image of 
+            - directory-service
+            - patient-service
+            - case-service
+            - appointment-service
+            - api-gateway
+
+    3. Run mysql inside docker container (do not expose port)
+            - directory-service-db
+            - patient-service-db
+            - case-service-db
+            - appointment-service-db
+            - Mount volume for mysql
+
+    4. Run below services as container
+            - directory-service
+            - patient-service
+            - case-service
+            - appointment-service
+            - api-gateway (Export 8080 port)
+
+    5. Connect hospital-console to api-gateway from container and test all features
+

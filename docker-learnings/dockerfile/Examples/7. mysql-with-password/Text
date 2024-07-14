@@ -1,0 +1,19 @@
+0. What is VM and Docker
+    - Why docker is effective and efficient
+1. What it is image, container
+2. How to create image (dockerfile)
+3. How to run image (container)
+    - Isolated
+       # Separate Network -> -p 3306:3306     => Host  => Cointainer   - Topic 2 : Network
+       # Separate File System        => Host  => Cointainer   - Topic 1 : Volume
+       #     File Share ->  Container : Container
+       #           1. Create volume (CMD -> docker volume create dnyanyog_volume ) // Named Volume => docker managed volume
+       #           2. Map volume map with container folder (CMD -> -v dnyanyog_volume:/app/data )
+       #                   docker run -it --rm -v dnyanyog_volume:/app/data ubuntu:latest
+       #     File Share ->  Host : Container : Container
+       #           1. Map host folder with container folder (CMD -> -v dnyanyog_volume:/app/data )
+       #                   docker run -it --rm -v /Users/vzodge/mydata:/app/data ubuntu:latest  // Host Mount Container => Managed Volume
+       #                   docker run -it --rm -v $(PWD):/app/data ubuntu:latest
+       # x Separate Process => XXXXXX  => Host  => Cointainer || Volume
+4. How to access service/port from container (port expose)
+5. How to share data across container and host

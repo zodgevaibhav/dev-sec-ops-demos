@@ -1,0 +1,15 @@
+# Base WORKDIR => /
+FROM ubuntu:latest
+
+# Install jdk 17
+RUN apt update
+RUN apt install -y openjdk-17-jdk
+
+# Set container run time path
+WORKDIR /app
+
+# Copy Jar from MAC to Ubunutu > /app
+COPY auth-service-1.0-SNAPSHOT.jar auth-service.jar
+
+# Run java -jar /app/api-gateway-docker-image-0.0.1.jar
+CMD ["java", "-jar","auth-service.jar"]

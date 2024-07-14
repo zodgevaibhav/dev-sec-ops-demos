@@ -9,4 +9,3 @@ public class AuthenticationServiceMain {
     SpringApplication.run(AuthenticationServiceMain.class, args);
   }
 }
-`

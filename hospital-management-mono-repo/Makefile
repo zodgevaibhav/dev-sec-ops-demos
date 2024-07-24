@@ -15,3 +15,9 @@ run_all:
 		echo "Running $$dir..."; \
 		docker run -dit --rm dnyanyog.org/$$dir:latest; \
 	done
+
+sonar_scan:
+	@for dir in $(DIRS); do \
+		echo "Scanning $$dir..."; \
+		cd $$dir && mvn clean verify sonar:sonar -Dsonar.projectKey=$$dir -Dsonar.host.url=http://localhost:9000 -Dsonar.login=<TOKEN> -Dmaven.test.skip=true && cd ..; \
+	done

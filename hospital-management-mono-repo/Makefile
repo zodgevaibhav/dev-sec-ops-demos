@@ -18,6 +18,12 @@ run_all:
 
 sonar_scan:
 	@for dir in $(DIRS); do \
-		echo "Scanning $$dir..."; \
+		echo "************************************* Scanning $$dir..."; \
 		cd $$dir && mvn clean verify sonar:sonar -Dsonar.projectKey=$$dir -Dsonar.host.url=http://localhost:9000 -Dsonar.login=<TOKEN> -Dmaven.test.skip=true && cd ..; \
+	done
+
+license_scan:
+	@for dir in $(DIRS); do \
+		echo "************************************* Scanning $$dir..."; \
+		cd $$dir && docker run -it --rm -v "$$(pwd)":/scan dnyanyog.org/license_finder:latest && cd ..; \
 	done

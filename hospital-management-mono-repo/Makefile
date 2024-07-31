@@ -35,6 +35,13 @@ trivy_image_scan:
 		echo "\n"; \
 	done
 
+grype_image_scan:
+	@for dir in $(DIRS); do \
+		echo "************************************* Scanning $$dir..."; \
+		docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v grype-cache:/root/.cache/grype --name Grype -e GRYPE_DB_CACHE_DIR=/root/.cache/grype anchore/grype dnyanyog.org/$$dir:latest ; \
+		echo "\n"; \
+	done
+
 trivy_dockerfile_scan:
 	@for dir in $(DIRS); do \
 		echo "************************************* Scanning $$dir..."; \

@@ -19,11 +19,25 @@ run_all:
 sonar_scan:
 	@for dir in $(DIRS); do \
 		echo "************************************* Scanning $$dir..."; \
-		cd $$dir && mvn clean verify sonar:sonar -Dsonar.projectKey=$$dir -Dsonar.host.url=http://localhost:9000 -Dsonar.login=<TOKEN> -Dmaven.test.skip=true && cd ..; \
+		cd $$dir && mvn clean verify sonar:sonar -Dsonar.projectKey=$$dir -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqa_f7491634b54501f7b2ccbc97e1cb7e9b84e73dd9 -Dmaven.test.skip=true && cd ..; \
 	done
 
 license_scan:
 	@for dir in $(DIRS); do \
 		echo "************************************* Scanning $$dir..."; \
 		cd $$dir && docker run -it --rm -v "$$(pwd)":/scan dnyanyog.org/license_finder:latest && cd ..; \
+	done
+
+trivy_image_scan:
+	@for dir in $(DIRS); do \
+		echo "************************************* Scanning $$dir..."; \
+		docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v trivy-cache:/root/.cache/ aquasec/trivy image dnyanyog.org/$$dir:latest --skip-db-update -q|grep Total -B2; \
+		echo "\n"; \
+	done
+
+trivy_dockerfile_scan:
+	@for dir in $(DIRS); do \
+		echo "************************************* Scanning $$dir..."; \
+		cd $$dir; docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v trivy-cache:/root/.cache/ -v "$$(pwd)":/scan/ aquasec/trivy fs /scan --skip-db-update -q|grep Total -B2 ;cd ..; \
+		echo "\n"; \
 	done

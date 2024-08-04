@@ -1,0 +1,41 @@
+name: Learn basic of GitHub Action
+
+on:
+  push:
+    branches:
+      -  master
+jobs:
+  print-os-release:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+      - name: print os-release
+        run: cat /etc/os-release
+        
+  environment-setup:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+      - name: install java
+        run: apk add --no-cache openjdk11-jdk
+      - name: Install Maven
+        run: |
+          MAVEN_VERSION=3.8.6
+          wget http://archive.apache.org/dist/maven/maven-3//${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+          tar -xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz
+          mv apache-maven-${MAVEN_VERSION} /opt/maven
+          ln -s /opt/maven/bin/mvn /usr/bin/mvn
+      - name: install git
+        run: apk add git
+
+  checkout-code:
+    runs-on: ubuntu-latest
+    needs : environment-setup
+    container:
+      image: alpine:latest
+    steps:
+      - name: print os-release
+        run: |
+          git clone https://github.com/zodgevaibhav/devops-demo-api-gateway.git

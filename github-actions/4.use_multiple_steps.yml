@@ -1,0 +1,25 @@
+name: Learn basic of GitHub Action
+
+
+on:
+  push:
+    branches:
+      -  master
+jobs:
+  print-os-release:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+      - name: print os-release
+        run: cat /etc/os-release
+        
+  install-java:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+      - name: install java
+        run: apk add --no-cache openjdk11-jdk
+      - name: print java -version
+        run: java --version

@@ -1,0 +1,17 @@
+name: Use image for a job
+
+on:
+  push:
+    branches:
+      -  master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    container:
+      image: alpine:latest
+
+    steps:
+      - name: print hellow
+        run: cat /etc/os-release
+        

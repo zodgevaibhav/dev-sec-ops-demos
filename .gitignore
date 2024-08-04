@@ -28,6 +28,9 @@ replay_pid*
 .classpath
 .project
 
+# Visual Studio Code
+.vscode/
+
 #MAC
 .DS_Store
 .DS_Store/

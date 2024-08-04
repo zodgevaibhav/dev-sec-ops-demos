@@ -1,0 +1,20 @@
+name: Learn github inbuild actions
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Build
+      run: mvn clean install

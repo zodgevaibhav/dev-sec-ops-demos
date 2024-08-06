@@ -1,0 +1,25 @@
+name: Learn GitHub Actions
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  color-selector:
+    runs-on: "ubuntu-latest"
+    outputs:
+      SELECTED_COLOR: ${{ steps.set_color.outputs.SELECTED_COLOR }}
+    steps:
+      - name: Set color
+        id: set_color
+        run: echo "SELECTED_COLOR=green" >> $GITHUB_OUTPUT
+      - name: Use environment variable from step
+        run: echo "The selected color is ${{ needs.color-selector.outputs.SELECTED_COLOR }}" # Will not be able use this way. Should set STEP ENV
+
+  consume:
+    runs-on: "ubuntu-latest"
+    needs: color-selector
+    steps:
+      - name: Get color
+        run: echo "The selected color is ${{ needs.color-selector.outputs.SELECTED_COLOR }}"

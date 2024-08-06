@@ -1,0 +1,46 @@
+name: Variable demo
+
+on: [push]
+
+env:
+  GLOBAL_VAR: "global_value"
+
+jobs:
+  set-variable:
+    runs-on: ubuntu-latest
+    outputs:
+      my_var: ${{ steps.set-output.outputs.my_var }}
+    steps:
+      - name: Set environment variable in step
+        run: echo "STEP_VAR=step_value" >> $GITHUB_ENV
+      
+      - name: Set job output variable
+        id: set-output
+        run: echo "::set-output name=my_var::output_value"
+
+      - name: Print all environment variables
+        run: |
+          echo "Global variable: $GLOBAL_VAR"
+          echo "Step variable: $STEP_VAR"
+          echo "Output variable: ${{ steps.set-output.outputs.my_var }}"
+          echo "GitHub context: ${{ github.job }}"
+          echo "Secrets (if any): ${{ secrets.MY_SECRET }}" # Make sure to replace MY_SECRET with an actual secret name
+
+  use-variable:
+    runs-on: ubuntu-latest
+    needs: set-variable
+    steps:
+      - name: Access environment variable set in step
+        run: echo "The value of STEP_VAR is $STEP_VAR"
+
+      - name: Access job output variable
+        run: echo "The value of my_var from previous job is ${{ needs.set-variable.outputs.my_var }}"
+
+      - name: Access global environment variable
+        run: echo "The value of GLOBAL_VAR is $GLOBAL_VAR"
+
+      - name: Use secret
+        run: echo "The value of MY_SECRET is ${{ secrets.MY_SECRET }}"
+
+      - name: Access GitHub context
+        run: echo "The job name is ${{ github.job }}"

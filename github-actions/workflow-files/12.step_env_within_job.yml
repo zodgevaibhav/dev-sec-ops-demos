@@ -1,0 +1,22 @@
+name: Learn GitHub Actions
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  color-selector:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Set environment variable in step
+        run: echo "STEP_VAR=step_value" >> $GITHUB_ENV
+
+      - name: Use environment variable from step
+        run: echo "Env setup from steps is - $STEP_VAR"
+
+  consume:
+    runs-on: "ubuntu-latest"
+    needs: color-selector
+    steps:
+      - name: Use environment variable from another job
+        run: echo "Env setup from steps is - $STEP_VAR"

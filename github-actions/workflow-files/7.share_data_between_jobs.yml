@@ -5,14 +5,7 @@ on:
     branches:
       -  master
 jobs:
-  print-os-release:
-    runs-on: ubuntu-latest
-    container:
-      image: alpine:latest
-    steps:
-      - name: print os-release
-        run: cat /etc/os-release
-        
+       
   environment-setup:
     runs-on: ubuntu-latest
     container:
@@ -27,9 +20,10 @@ jobs:
           tar -xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz
           mv apache-maven-${MAVEN_VERSION} /opt/maven
           ln -s /opt/maven/bin/mvn /usr/bin/mvn
+
       - name: install git
         run: apk add git
-        
+
       - name: Save Maven and Git configuration
         run: |
           tar -czf maven-and-git.tar.gz /opt/maven /usr/bin/git

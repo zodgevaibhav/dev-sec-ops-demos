@@ -1,0 +1,29 @@
+name: Using Actions Example
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Setup Java
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      # Example of a Docker action from a public repository
+      - name: Run Docker Action
+        uses: docker://alpine:3.12
+        with:
+          args: ["echo", "Hello from Alpine!"]
+

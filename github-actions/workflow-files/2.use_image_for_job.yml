@@ -1,4 +1,4 @@
-name: Use image for a job
+name: Use container for a job
 
 on:
   push:
@@ -6,12 +6,11 @@ on:
       -  master
 jobs:
   build:
-    runs-on: ubuntu-latest
-    
+    #GitHub Hosted runner
+    runs-on: ubuntu-latest 
     container:
       image: alpine:latest
-
     steps:
       - name: print hellow
         run: cat /etc/os-release
-        
+        continue-on-error: true

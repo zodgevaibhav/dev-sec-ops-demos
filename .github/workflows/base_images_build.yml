@@ -1,0 +1,17 @@
+name: Build base images if found change
+
+on:
+  push:
+    paths: /sast/license-finder/dockerfile
+
+jobs:
+
+  build_license_finder_image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Build license finder images
+        run: docker build -t zodgevv/license-finder:latest -f /sast/license-finder/dockerfile .

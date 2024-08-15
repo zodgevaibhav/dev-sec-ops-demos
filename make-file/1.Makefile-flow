@@ -1,0 +1,25 @@
+# By defaul first goal is defaul goal
+# Default goal can be changed by setting .DEFAULT_GOAL
+
+.DEFAULT_GOAL := test
+
+# Can create group of recepie and name it
+all: clean compile build install
+
+
+clean:
+	echo "Clean target called"
+
+# Command with @ print command itself along with output
+compile: 
+	@echo "Compile target called"
+
+build : clean compile
+	@echo "Build target called"
+
+test :
+	@echo "test target called"
+
+install :
+	@echo "$@ target called"
+

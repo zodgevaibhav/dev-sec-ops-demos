@@ -1,0 +1,25 @@
+# pre-requisite also considered as file
+# if file not present it will create
+# So want to tell make, the pre-requisite is not file, it's just target
+.PHONY: wait_file
+
+NAME := Vaibhav
+
+# Immediate/early evaluation of command
+EARLY_DATE := $(shell date)
+
+# lazy evaluation of command
+LAZY_DATE = $(shell date)
+
+print:
+	@echo "Hello $(NAME)"
+
+print_date: wait_file
+
+	@echo "Early Date : $(EARLY_DATE)"
+	@echo "Lazy  Date : $(LAZY_DATE)"
+	@echo "current date:$(shell date)"
+
+wait_file:
+	sleep 3
+	touch $@

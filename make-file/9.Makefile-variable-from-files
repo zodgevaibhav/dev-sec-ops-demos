@@ -1,0 +1,6 @@
+FILE_LIST = $(shell cat data/file_list.txt)
+
+print_file_names:
+	@for file in $(FILE_LIST); do \
+		echo $$file; \
+	done

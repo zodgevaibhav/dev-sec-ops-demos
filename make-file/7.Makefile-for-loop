@@ -1,0 +1,18 @@
+
+CHARS = a b c d e
+
+# Make variable
+SINGLE_CHAR=v
+
+print:
+	@echo $(SINGLE_CHAR)
+	@for char in $(CHARS); do \
+		echo "$$char"; \
+	done
+
+print_shell_var:
+# Shell variable
+# Each recipie run in it's own shell hence does not share data
+# Need to explicitly mention to run in single shell by using ; \ 
+	@NAME="Vaibhav"; \
+	echo $$NAME

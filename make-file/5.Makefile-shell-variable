@@ -1,0 +1,5 @@
+
+create-print-file:
+	@NAME="Vaibhav Zodge"; \
+	echo $$NAME
+	@echo "Name from other shell $$NAME"

@@ -1,0 +1,6 @@
+DIRS = $(shell ls -l1)
+
+print_dirs:
+	@for dir in $(DIRS); do \
+		echo $$dir ; \
+	done

@@ -1,0 +1,21 @@
+.DEFAULT_GOAL := all
+
+all: clean compile test install
+
+clean:
+# $@ symbol represent recipe name
+	@echo "Running $@"
+	cd api-gateway && mvn clean && cd ..
+
+compile: 
+	cd api-gateway && mvn compile && cd ..
+
+# With pre-requisite
+install : clean compile
+# $< symbol represent first pre-requisite
+	echo "Ran dependent $<"
+	cd api-gateway && mvn install && cd ..
+
+test : clean compile
+	cd api-gateway && mvn test && cd ..
+

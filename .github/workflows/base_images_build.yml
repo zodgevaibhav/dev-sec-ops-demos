@@ -2,7 +2,7 @@ name: Build base images if found change
 
 on:
   push:
-    paths: /sast/license-finder/dockerfile
+    paths: sast/license-finder/dockerfile
 
 jobs:
 
@@ -12,6 +12,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
+
       - name: Build license finder images
-        run: docker build -t zodgevv/license-finder:latest -f /sast/license-finder/dockerfile .
+        run: docker build -t zodgevv/license-finder:latest -f sast/license-finder/dockerfile .
+
+      - name: Log in to Docker Registry zodgevv
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_REGISTRY_USER }}
+          password: ${{ secrets.GH_TOKEN }} 
+        
+      - name: Push Docker image to GitHub Packages
+        run: |
+          REPO_NAME=$(basename $(pwd))
+          docker push zodgevv/license-finder:latest

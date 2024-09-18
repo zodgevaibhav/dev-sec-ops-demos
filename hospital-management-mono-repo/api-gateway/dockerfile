@@ -1,5 +1,5 @@
 # Base WORKDIR => /
-FROM zodgevv/openjdk:24-jdk-slim
+FROM openjdk:24-jdk-slim
 WORKDIR /app
 
 # Define build-time argument

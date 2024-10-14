@@ -1,0 +1,6 @@
+apiVersion: 1
+providers:
+  - name: 'Spring Boot Dashboard'
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards/spring-boot-dashboard.json

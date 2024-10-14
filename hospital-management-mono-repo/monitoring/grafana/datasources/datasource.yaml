@@ -1,0 +1,9 @@
+apiVersion: 1
+datasources:
+  - name: Hospital Management
+    type: prometheus
+    url: http://host.docker.internal:9090
+    access: proxy
+    basicAuth: false
+    jsonData:
+      tlsSkipVerify: true

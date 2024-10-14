@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Example 1: Basic If-Else
+# -gt  -lt  -ge  -le  -eq -ne
 if [ "$1" -gt 10 ]; then
   echo "Number is greater than 10"
 else

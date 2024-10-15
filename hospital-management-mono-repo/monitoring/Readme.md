@@ -1,7 +1,14 @@
 docker network create monitoring
 
 
-docker run -dit  --name=prometheus --network=monitoring -p 9090:9090 -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml   prom/prometheus
+Prometheus :
+docker run -dit  --name=prometheus --network=monitoring -p 9090:9090 -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus
+
+Prometheus with Alerts:
+docker run -dit  --name=prometheus --network=monitoring -p 9090:9090 -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/prometheus/alert/alert.rules.yml.yaml:/etc/prometheus/alert.rules.yml -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus
+
+
+-v /path/to/alert.rules.yml:/etc/prometheus/alert.rules.yml
 
 
 docker run -d \
@@ -29,3 +36,9 @@ docker run -d \
   -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/grafana/dashboard/spring-boot-dashboard.json:/etc/grafana/provisioning/dashboards/spring-boot-dashboard.json \
   -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/grafana/datasources/:/etc/grafana/provisioning/datasources/ \
   grafana/grafana
+
+
+
+
+Alert Manager:
+docker run -d --name=alertmanager --network=monitoring -p 9093:9093 -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/prometheus/alert/alertmanager.yml:/etc/alertmanager/alertmanager.yml prom/alertmanager:latest --config.file=/etc/alertmanager/alertmanager.yml

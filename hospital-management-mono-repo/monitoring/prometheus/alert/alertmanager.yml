@@ -1,0 +1,24 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'zodgevv@gmail.com'
+  smtp_auth_username: 'zodgevv@gmail.com'
+  smtp_auth_password: 'Test@123'  # Use the App Password generated earlier
+  smtp_require_tls: true
+
+route:
+  receiver: 'email-notifications'
+  group_wait: 10s
+  group_interval: 10m
+  repeat_interval: 1h
+
+receivers:
+  - name: 'email-notifications'
+    email_configs:
+      - to: 'zodgevaibhav@gmail.com.com'
+        send_resolved: true
+        html: |
+          <h3>{{ .CommonAnnotations.summary }}</h3>
+          <p>{{ .CommonAnnotations.description }}</p>
+          <p>Status: {{ .Status }}</p>
+          <p>Alert: {{ .Labels.alertname }}</p>

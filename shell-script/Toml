@@ -1,0 +1,26 @@
+version = 2
+
+[plugins."io.containerd.grpc.v1.cri"]
+  sandbox_image = "registry.k8s.io/pause:3.5"
+
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  snapshotter = "overlayfs"
+  default_runtime_name = "runc"
+  
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+  runtime_type = "io.containerd.runc.v2"
+
+# Registry configuration with authentication
+[plugins."io.containerd.grpc.v1.cri".registry]
+  config_path = "/etc/containerd/certs.d" # Optional: Specify if you have custom certs.
+
+[plugins."io.containerd.grpc.v1.cri".registry.mirrors."<your-private-registry-domain>"]
+  endpoint = ["https://<your-private-registry-domain>"]
+
+[plugins."io.containerd.grpc.v1.cri".registry.configs."<your-private-registry-domain>".auth]
+  username = "<your-username>"
+  password = "<your-password>"
+
+[plugins."io.containerd.grpc.v1.cri".cni]
+  bin_dir = "/opt/cni/bin"
+  conf_dir = "/etc/cni/net.d"

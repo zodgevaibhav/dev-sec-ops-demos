@@ -7,15 +7,10 @@ docker run -dit  --name=prometheus --network=monitoring -p 9090:9090 -v /Users/v
 Prometheus with Alerts:
 docker run -dit  --name=prometheus --network=monitoring -p 9090:9090 -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/prometheus/alert/alert.rules.yml.yaml:/etc/prometheus/alert.rules.yml -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus
 
+docker run -d --name=alertmanager --network=monitoring -p 9093:9093 -v /Users/vzodge/ALL_GIT_REPO/dev-sec-ops-directory/dev-sec-ops-demos/hospital-management-mono-repo/monitoring/prometheus/alert/alertmanager.yml:/etc/alertmanager/alertmanager.yml prom/alertmanager:latest --config.file=/etc/alertmanager/alertmanager.yml
 
--v /path/to/alert.rules.yml:/etc/prometheus/alert.rules.yml
 
-
-docker run -d \
-  --name=grafana \
-  --network=monitoring \
-  -p 3003:3000 \
-  grafana/grafana
+docker run -d  --name=grafana  --network=monitoring  -p 3003:3000  grafana/grafana
 
 Grafana : Dashboard link for Springboot
     https://grafana.com/grafana/dashboards/10280-microservices-spring-boot-2-1/

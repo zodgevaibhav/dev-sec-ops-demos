@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: api-gateway-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+      - name : api-gateway-1
+        image: dnyanyog.org/api-gateway:latest
+        imagePullPolicy: Never
+      - name : api-gateway-2
+        image: dnyanyog.org/api-gateway:latest
+        imagePullPolicy: Never
+        env:
+        - name: SERVER_PORT
+          value: "8081"

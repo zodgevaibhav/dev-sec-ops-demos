@@ -1,9 +1,12 @@
 package org.dnyanyog.config;
 
+import java.util.Random;
+
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 
 @Configuration
 public class RouterConfig {
@@ -11,6 +14,24 @@ public class RouterConfig {
   public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
     return builder
         .routes()
+        .route(
+                    "healthy",
+                    r ->
+                        r.path("/api/v1/healthy") // DUMMY IMPLEMENTATION
+                            .filters(
+                                f ->
+                                    f.filter(
+                                        (exchange, chain) -> {
+                                        int randomNumber = new Random().nextInt();
+                                        if (randomNumber % 2 == 0) {
+                                            exchange.getResponse().setStatusCode(HttpStatus.OK); // Return 200
+                                            return exchange.getResponse().setComplete();
+                                        } else {
+                                            exchange.getResponse().setStatusCode(HttpStatus.NOT_FOUND); // Return 404
+                                            return exchange.getResponse().setComplete();
+                                        }
+                                        }))
+                            .uri("http://localhost:8081"))
         // directory service
         .route(
             "directory_login_route",

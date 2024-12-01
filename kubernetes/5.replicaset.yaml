@@ -15,6 +15,14 @@ spec:
       containers:
       - name : api-gateway-1
         image: dnyanyog.org/api-gateway:latest
+        livenessProbe:
+          httpGet:
+            path: /api/v1/healthy
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 1
+          timeoutSeconds: 2
+          failureThreshold: 3
         imagePullPolicy: Never
       - name : api-gateway-2
         image: dnyanyog.org/api-gateway:latest

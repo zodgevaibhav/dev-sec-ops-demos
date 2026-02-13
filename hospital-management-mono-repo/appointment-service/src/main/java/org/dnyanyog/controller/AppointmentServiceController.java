@@ -11,9 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 public class AppointmentServiceController {
   @Autowired AppointmentServiceImp appointmentService;
+
+  private static final Logger logger = LoggerFactory.getLogger(AppointmentServiceController.class);
 
   @PostMapping(
       path = "/api/v1/appointment/add",
@@ -21,6 +26,7 @@ public class AppointmentServiceController {
       produces = {"application/json", "application/xml"})
   public AppointmentResponse addAppointment(@RequestBody AppointmentRequest appointmentRequest)
       throws Exception {
+        logger.info("Received appointment request: {}", appointmentRequest.toString());
     return appointmentService.addAppointment(appointmentRequest);
   }
 
